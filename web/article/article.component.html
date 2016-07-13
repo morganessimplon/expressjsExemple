@@ -1,0 +1,51 @@
+<div id="articleGeneral">
+
+    <h1>{{titre}}</h1>
+    <div>
+        <button (click)="ajouterArticle()" type="button" class="btn btn-default">Nouvel article</button>
+    </div>
+
+    <div *ngIf="enrArticle">
+        <div>
+            <button (click)="setPrecedent()" type="button" class="btn btn-default" >Prec</button>
+            <button (click)="setSuivant()" type="button" class="btn btn-default" >Suiv</button>
+        </div>
+        
+        <div class="form-group">
+            <label for="id">Id :</label>
+            <input type="number" class="form-control" placeholder="Obligatoire"
+                 [(ngModel)]="enrArticle.id">
+        </div>
+        <div class="form-group">
+            <label for="code">Code :</label>
+            <input type="number" class="form-control"
+                 [(ngModel)]="enrArticle.code">
+        </div>
+        <div class="form-group">
+            <label for="description">Description :</label>
+            <input type="text" class="form-control"
+                 [(ngModel)]="enrArticle.description">
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix :</label>
+            <input type="number" class="form-control"
+                 ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"
+                 [(ngModel)]="enrArticle.prix">
+        </div>
+        <div>
+            <button (click)="onSubmit()">Valider</button>
+            <button (click)="ajouterArticle()" type="button" class="btn btn-default" >Nouvel article</button>
+        </div>
+        
+    </div>
+
+    <table id="tableau">
+        <tr #articleEnCours *ngFor="let article of _listeArticles" class="">
+                <td>{{article.code}}</td>
+                <td>{{article.description}}</td>
+                <td>{{article.prix}}€</td>
+                <td><button (click)="supprimerArticle(articleEnCours)" class="b">Supprimer</button></td>
+        </tr>  
+    </table>
+
+</div>

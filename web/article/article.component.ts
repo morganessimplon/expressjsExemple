@@ -15,6 +15,7 @@ export class ArticleDetailComponent implements OnInit {
     private _articleService: ArticleService;
     private _indiceEnCours: number;
     private _router: Router;
+    private error: any;
 
     constructor(articleService: ArticleService, router: Router) {
         this._articleService = articleService;
@@ -27,22 +28,31 @@ export class ArticleDetailComponent implements OnInit {
     submitted = false;
 
     ngOnInit() {
-        this._listeArticles = this._articleService.getArticles();
-        this.setEncours(0);
-        /* this._articleService.getArticles()
+        // this._listeArticles = this._articleService.getArticles();
+        this._listeArticles = [];
+
+        this._articleService.getArticles()
             .then(articles => {
                 this._listeArticles = articles;
                 this.setEncours(0);
-                }); */
+                });
+                .catch(error => this.error = error);
     }
 
     onSubmit() {
         this.submitted = true;
         if (this.enrArticle.id < 0)
-            this._articleService.addArticle(this.enrArticle);
+            this._articleService.addArticle(this.enrArticle)
+            .then(article => {
+                this.enrArticle = article;
+                this._listeArticles[this._indiceEnCours] = this.enrArticle;
+            });
         else
-            this._articleService.setArticle(this.enrArticle);
-        this._listeArticles[this._indiceEnCours] = this.enrArticle;
+            this._articleService.majArticle(this.enrArticle)
+            .then(article => {
+                this.enrArticle = article;
+                this._listeArticles[this._indiceEnCours] = this.enrArticle;
+            });
     }
 
     active = true;
@@ -55,7 +65,9 @@ export class ArticleDetailComponent implements OnInit {
     }
 
     private supprimerArticle() {
-        this._articleService.suppArticle(this.enrArticle);
+        if (this.enrArticle.id >= 0)
+            this._articleService.supprimerArticle(this.enrArticle.id);
+        this._listeArticles.splice(this._indiceEnCours, 1);
         this._listeArticles.splice(this._indiceEnCours, 1);
         if (this._indiceEnCours > 0)
             this._indiceEnCours--;
