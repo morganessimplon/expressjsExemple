@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "concurrently \"npm run tsc:w\" \"npm run server\" ",
-    "server": "node serveurweb.js",
+    "server": "node serverweb.js",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
