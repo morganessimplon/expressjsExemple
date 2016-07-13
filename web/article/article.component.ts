@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Article }    from './article';
+import { Article } from './article';
 import { ArticleService } from './article.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class ArticleDetailComponent implements OnInit {
             .then(articles => {
                 this._listeArticles = articles;
                 this.setEncours(0);
-                });
+                })
                 .catch(error => this.error = error);
     }
 
@@ -67,7 +67,6 @@ export class ArticleDetailComponent implements OnInit {
     private supprimerArticle() {
         if (this.enrArticle.id >= 0)
             this._articleService.suppArticle(this.enrArticle.id);
-        this._listeArticles.splice(this._indiceEnCours, 1);
         this._listeArticles.splice(this._indiceEnCours, 1);
         if (this._indiceEnCours > 0)
             this._indiceEnCours--;

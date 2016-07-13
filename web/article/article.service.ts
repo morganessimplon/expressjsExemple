@@ -14,7 +14,7 @@ export class ArticleService {
 
     private http: Http;
     private headers: Headers;
-    print options: RequestOptions;
+    private options: RequestOptions;
 
     constructor(http: Http) {
         this.http = http;

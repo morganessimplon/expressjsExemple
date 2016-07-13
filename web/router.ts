@@ -10,13 +10,13 @@ export const routes: RouterConfig = [
     pathMatch: 'full'
   },
   {
+    path: 'client',
+    component: ClientDetailComponent
+  },
+  {
     path: '',
     redirectTo: '/article',
     pathMatch: 'full'
-  },
-  {
-    path: 'client',
-    component: ClientDetailComponent
   },
   {
     path: 'article',

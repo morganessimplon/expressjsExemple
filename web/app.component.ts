@@ -10,7 +10,7 @@ import { ArticleService } from './article/article.service';
     selector: 'my-app',
     template: `<router-outlet></router-outlet>`,
     directives: [ROUTER_DIRECTIVES],
-    providers: [ ClientService, ArticleService],
+    providers: [ClientService, ArticleService],
     precompile : [ClientDetailComponent, ArticleDetailComponent]
 
 })

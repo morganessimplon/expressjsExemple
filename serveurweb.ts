@@ -40,7 +40,7 @@ app.get ('api/listearticle', (req, res) => {
     appCommande.listerLesArticles(res);
 });
 
-//gestion d'un articles
+//gestion d'un article
 app.route('api/article')
     .get((req, res) => {
         appCommande.ecrireLog("req get article ")
