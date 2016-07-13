@@ -1,6 +1,8 @@
 import { Server, Db } from "mongodb";
 import { Client } from "../web/client/client";
+import { Article } from "../web/article/article";
 import { BdClient } from "./bdclient";
+import { BdArticle } from "./bdarticle";
 
 const PORT_MONGODB = 27017;
 const NOMBASE = 'bdcommande';
@@ -37,6 +39,21 @@ export class AppPrincipal {
             })
             .catch(function () {
                 console.log("erreur listerLesClients")
+            });
+    }
+
+    public listerLesArticles(res: any): Promise<any> {
+        let bdArticle: BdArticle;
+        this.ouvrirConnection();
+        bdArticle = new BdArticle(this._db);
+        return bdArticle.listerTousLesArticles()
+            .then(liste => {
+                this.fermerConnection();
+                res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.stringify(liste));
+            })
+            .catch(function() {
+                console.log("erreur listerLesArticles")
             });
     }
 

@@ -66,7 +66,7 @@ export class ArticleDetailComponent implements OnInit {
 
     private supprimerArticle() {
         if (this.enrArticle.id >= 0)
-            this._articleService.supprimerArticle(this.enrArticle.id);
+            this._articleService.suppArticle(this.enrArticle.id);
         this._listeArticles.splice(this._indiceEnCours, 1);
         this._listeArticles.splice(this._indiceEnCours, 1);
         if (this._indiceEnCours > 0)

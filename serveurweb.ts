@@ -35,6 +35,21 @@ app.route('/api/client')
     .put()
     .delete();
 
+// liste des articles
+app.get ('api/listearticle', (req, res) => {
+    appCommande.listerLesArticles(res);
+});
+
+//gestion d'un articles
+app.route('api/article')
+    .get((req, res) => {
+        appCommande.ecrireLog("req get article ")
+    })
+    .post()
+    .put()
+    .delete();
+
+
 //gestion de la page non trouvée
 app.use(function (req, res, next) {
     res.setHeader('Content-Type', 'text/plain');
